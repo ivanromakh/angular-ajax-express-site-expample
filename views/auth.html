@@ -1,0 +1,31 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+	    <input ng-model="log">
+	    <input ng-model="pass">
+	    <button ng-click="myData.doClick(item, $event)">Ввійти</button>
+	</div>
+
+	<script>
+	    var app = angular.module('myApp', []);
+	    app.controller('myCtrl', function($scope, $http) {
+	        $scope.myData = {};
+	        $scope.myData.doClick = function(item, event) {
+	        	var parameter = JSON.stringify({log: $scope.log, pass: $scope.pass});
+	        	var url = '/authdata';
+	        	console.log($scope.log);
+	        	console.log($scope.pass);
+	        	console.log(parameter);
+	        	$http.post(url, parameter)
+	        	   .success(function(data, status, headers, config) {
+				        console.log(data);
+				    })
+            };
+        });
+    </script>
+</body>
+</html>
